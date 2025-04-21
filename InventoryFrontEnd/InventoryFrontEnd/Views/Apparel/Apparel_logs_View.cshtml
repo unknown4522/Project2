@@ -1,0 +1,199 @@
+﻿@using InventoryFrontEnd.Models;
+@model Modelall
+@{
+    ViewBag.Title = "Apparel_logs_View";
+    Layout = "~/Views/Shared/With_Side_bar.cshtml";
+}
+<style>
+    .hover-scale:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s ease-in-out;
+    }
+</style>
+
+<div class="col-md-9 h-100 overflow-auto">
+    <div class="sticky-xl-top">
+        <div class="card">
+            <div class="card-body mt-3">
+                <h2 id="room-label" class="text-center mt-4">@ViewBag.campus_name</h2>
+                <h2 class="text-center mt-4">Apparel Reports</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="text-center">
+                            @foreach (var item in Model.Allapparelrecordcounters)
+                            {
+                                <a class="text-center">@Html.DisplayFor(modelItem => item.Counter)</a>
+                            }
+                        </h3>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-8 offset-md-4">
+                                <div class="search-form">
+                                    <input type="text" id="tableSearch" class="custom-input" placeholder="Search...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Grade Level</th>
+                                <th>Quantity</th>
+                                <th>Size</th>
+                                <th>Date</th>
+                                <th>Process</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Allapparellogs_data.OrderByDescending(log => log.Transaction_date))
+                            {
+                                <tr class="clickable-row hover-scale">
+                                    <td>@Html.DisplayFor(modelItem => item.Grade_level)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Size)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Transaction_date)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Transaction)</td>
+                                    <td data-transaction="@item.Transaction" data-first-name="@item.First_name" data-last-name="@item.Last_name" data-receipt-number="@item.Reciept_number"></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="itemDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">More Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4"><strong>Process:</strong></div>
+                    <div class="col-md-8"><span id="modalprocess"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>First Name:</strong></div>
+                    <div class="col-md-8"><span id="modalfirstname"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>Last name:</strong></div>
+                    <div class="col-md-8"><span id="modallastname"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>Receipt Number:</strong></div>
+                    <div class="col-md-8"><span id="modalreceiptnumber"></span></div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".clickable-row");
+
+        rows.forEach(row => {
+            row.addEventListener("click", function () {
+                const transaction = this.querySelector("td[data-transaction]").getAttribute("data-transaction");
+                const FirstName = this.querySelector("td[data-first-name]").getAttribute("data-first-name");
+                const LastName = this.querySelector("td[data-last-name]").getAttribute("data-last-name");
+                const receiptnumber = this.querySelector("td[data-receipt-number]").getAttribute("data-receipt-number");
+
+                document.getElementById("modalprocess").textContent = transaction;
+                document.getElementById("modalfirstname").textContent = FirstName;
+                document.getElementById("modallastname").textContent = LastName;
+                document.getElementById("modalreceiptnumber").textContent = receiptnumber;
+
+
+                $('#itemDetailsModal').modal('show');
+            });
+        });
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function compareDates(a, b) {
+            return new Date(b) - new Date(a);
+        }
+        var $tbody = $("table tbody");
+        $tbody.find("tr").sort(function (a, b) {
+            var dateA = $(a).find("td:nth-child(3)").text();
+            var dateB = $(b).find("td:nth-child(3)").text();
+            return compareDates(dateA, dateB);
+        }).appendTo($tbody);
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".clickable-row");
+
+        rows.forEach(row => {
+            row.addEventListener("click", function () {
+                const transaction = this.querySelector("td[data-transaction]").getAttribute("data-transaction");
+                const FirstName = this.querySelector("td[data-first-name]").getAttribute("data-first-name");
+                const LastName = this.querySelector("td[data-last-name]").getAttribute("data-last-name");
+                const receiptnumber = this.querySelector("td[data-receipt-number]").getAttribute("data-receipt-number");
+
+                document.getElementById("modalprocess").textContent = transaction;
+                document.getElementById("modalfirstname").textContent = FirstName;
+                document.getElementById("modallastname").textContent = LastName;
+                document.getElementById("modalreceiptnumber").textContent = receiptnumber;
+
+
+                $('#itemDetailsModal').modal('show');
+            });
+        });
+
+    });
+</script>
+
+
+
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("tableSearch");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table-striped");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].innerText || td[j].textContent;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+
+    document.getElementById("tableSearch").addEventListener("keyup", searchTable);
+</script>

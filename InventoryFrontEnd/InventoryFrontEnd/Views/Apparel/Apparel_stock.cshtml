@@ -1,0 +1,402 @@
+﻿@using InventoryFrontEnd.Models;
+@model Modelall
+@{
+    ViewBag.Title = "Available Apparel";
+    Layout = "~/Views/Shared/With_Side_bar.cshtml";
+}
+
+<!-- Main Content -->
+<div class="col-md-9 h-100 overflow-auto">
+    <div class="sticky-xl-top">
+        <div class="card">
+            <div class="card-body mt-3">
+                <h2 id="room-label" class="text-center mt-4">@ViewBag.campus_name</h2>
+                <h1 class="text-center">Apparel List</h1>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <button type="button"  class="btn btn-sm btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#adduniform">
+                                Add Record
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h3 class="text-center">
+                            @foreach (var item in Model.AllApparelavailablecounters)
+                            {
+                                <a class="text-center">@Html.DisplayFor(modelItem => item.Counter)</a>
+                            }
+                        </h3>
+                    </div>
+                    <div class="col-4">
+                        <div class="search-form">
+                            <input type="text" id="tableSearch" class="custom-input" placeholder="Search..."><br />
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>GRADE LEVEL</th>
+                                        <th>CLOTHES NAME</th>
+                                        <th>SIZE</th>
+                                        <th>QUANTITY</th>
+                                        <th>ACTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var reversedItems = Model.Allapparel_stock.Reverse().ToList();
+                                    }
+                                    @foreach (var item in reversedItems)
+                                    {
+                                        <tr>
+                                            <td class="center-text">@Html.DisplayFor(modelItem => item.Grade_level)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Apparel_type)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Size)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary custom-button" data-bs-toggle="modal" data-bs-target="#addquantity" onclick="setUpdatestock('@item.Apparel_ID', '@item.Apparel_type', '@item.Grade_level', '@item.Size')">ADD</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*ADD QUANTITY MODAL*@
+    <div class="modal fade add-item-modal" id="addquantity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xs">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-center" id="exampleModalLabel">ADD</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   
+                        <label for="add_stock" class="form-label fw-bold">QUANTITY</label>
+                        <input type="number" class="form-control center-text" id="add_stock" name="add_stock" placeholder="Enter quantity" autocomplete="off" required />
+                        <input type="text" class="form-control visually-hidden" id="add_uniform_id" name="add_uniform_id" placeholder="Enter uniform ID" autocomplete="off" required readonly />
+                        <input type="text" class="form-control visually-hidden" id="add_grade_level" name="add_grade_level" placeholder="Enter Grade Level" autocomplete="off" required readonly />
+                        <input type="text" class="form-control visually-hidden" id="add_clothes_type" name="add_clothes_type" placeholder="Enter Clothes Type" autocomplete="off" required readonly />
+                        <input type="text" class="form-control visually-hidden" id="add_size" name="add_size" placeholder="Enter Size" autocomplete="off" required readonly />
+                        <input type="text" class="form-control visually-hidden" id="add_transaction" name="add_transaction" value="ADD" autocomplete="off" required readonly />
+                        <input type="text" class="form-control center-text visually-hidden" id="add_campus_name" name="add_campus_name" value="@ViewBag.campus_name" autocomplete="off" required />
+                        <div class="modal-footer text-center">
+                            <button class="btn btn-success" id="ADDquantity">IN</button>
+                        </div>
+          
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@*ADD UNIFORM MODAL*@
+<div class="modal fade add-item-modal" id="adduniform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title text-center" id="exampleModalLabel">ADD UNIFORM</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="add_grade" class="form-label fw-bold">GRADE LEVEL</label>
+                            <select class="form-select" id="add_grade" name="add_grade" autocomplete="off">
+                                @foreach (var Item in Model.Allgrades)
+                                {
+                                    <option value="@Item.Grade_level">@Item.Grade_level</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="add_uniform_type" class="form-label fw-bold">CLOTHES TYPE</label>
+                            <select class="form-select" id="add_uniform_type" name="add_uniform_type" autocomplete="off">
+                                @foreach (var Item in Model.Allapparel_type)
+                                {
+                                    <option value="@Item.Apparel_type">@Item.Apparel_type</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="add_sizes" class="form-label fw-bold">SIZE</label>
+                            <select class="form-select" id="add_sizes" name="add_sizes" autocomplete="off">
+                                @foreach (var Item in Model.Allsize)
+                                {
+                                    <option value="@Item.Size">@Item.Size</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="add_stocks" class="form-label fw-bold">Quantity</label>
+                            <input type="number" class="form-control" id="add_stocks" name="add_stocks" placeholder="Enter Quantity" autocomplete="off" required />
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control visually-hidden" id="add_campus_name" name="add_campus_name" value="@ViewBag.campus_name" autocomplete="off" required />
+                        </div>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button class="btn btn-success" id="addstockbtn">ADD</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">BACK</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal Dialog -->
+<div class="modal fade" id="model_error" tabindex="-1" aria-labelledby="model_errorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="model_errorLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="error_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal Dialog -->
+<div class="modal fade" id="model_success" tabindex="-1" aria-labelledby="model_successLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="model_successLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="success_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#addstockbtn").click(function () {
+            $("#error_message").text("");
+            var add_grade = $("#add_grade").val();
+            if (add_grade === null || add_grade === '') {
+                showErrorMessage("Please supply a Grade Level.");
+                return;
+            }
+            var add_uniform_type = $("#add_uniform_type").val();
+            if (add_uniform_type === null || add_uniform_type === '') {
+                showErrorMessage("Please choose a valid Apparel Type.");
+                return;
+            }
+            var add_sizes = $("#add_sizes").val();
+            if (add_sizes === null || add_sizes === '') {
+                showErrorMessage("Please choose a valid Size.");
+                return;
+            }
+            var add_stocks = $("#add_stocks").val();
+            if (add_stocks === '') {
+                showErrorMessage("Please supply Quantity.");
+                return;
+            }
+            var add_campus_name = $("#add_campus_name").val();
+
+            var Addstockdata = {
+                add_grade: add_grade,
+                add_uniform_type: add_uniform_type,
+                add_sizes: add_sizes,
+                add_stocks: add_stocks,
+                add_campus_name: add_campus_name
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Apparel/adduniform",
+                data: Addstockdata,
+                success: function (response) {
+                    if (response.indexOf("Successfully added") !== -1) {
+                        showSuccessMessage(response);
+                    } else {
+                        showErrorMessage(response);
+                    }
+                },
+                error: function () {
+                    showErrorMessage("An error occurred while adding the Room item");
+                },
+            });
+        });
+
+        function showErrorMessage(message) {
+            $("#error_message").text(message);
+            $("#model_error").modal("show");
+        }
+
+        function showSuccessMessage(response) {
+            // Assuming your response contains a specific success message
+            var successMessage = "Successfully added"; // Modify as needed
+            if (response.indexOf(successMessage) !== -1) {
+                $("#success_message").text(successMessage);
+                $("#model_success").modal("show");
+
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Handle unexpected response here
+                showErrorMessage("Unexpected response: " + response);
+            }
+        }
+    });
+    </script>
+
+<script>
+    $(document).ready(function () {
+        $("#ADDquantity").click(function () {
+            $("#error_message").text("");
+            var add_stock = $("#add_stock").val();
+            if (add_stock === '') {
+                showErrorMessage("Please supply Number of Apparel.");
+                return;
+            }
+            var add_uniform_id = $("#add_uniform_id").val();
+            if (add_uniform_id === null || add_uniform_type === '') {
+                showErrorMessage("Please supply Apparel ID.");
+                return;
+            }
+            var add_grade_level = $("#add_grade_level").val();
+            if (add_grade_level === null || add_grade_level === '') {
+                showErrorMessage("Please supply Grade Level.");
+                return;
+            }
+            var add_clothes_type = $("#add_clothes_type").val();
+            if (add_clothes_type === '') {
+                showErrorMessage("Please supply Apparel Type .");
+                return;
+            }
+            var add_size = $("#add_size").val();
+            if (add_size === '') {
+                showErrorMessage("Please supply Apparel Size .");
+                return;
+            }
+            var add_transaction = $("#add_transaction").val();
+            if (add_transaction === '') {
+                showErrorMessage("Please supply Transaction  .");
+                return;
+            }
+            var add_campus_name = $("#add_campus_name").val();
+
+            var Quantitydata = {
+                add_stock: add_stock,
+                add_uniform_id: add_uniform_id,
+                add_grade_level: add_grade_level,
+                add_clothes_type: add_clothes_type,
+                add_size: add_size,
+                add_transaction: add_transaction,
+                add_campus_name: add_campus_name
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Apparel/addstock",
+                data: Quantitydata,
+                success: function (response) {
+                    if (response.indexOf("Successfully added") !== -1) {
+                        showSuccessMessage(response);
+                    } else {
+                        showErrorMessage(response);
+                    }
+                },
+                error: function () {
+                    showErrorMessage("An error occurred while adding the Room item");
+                },
+            });
+        });
+
+        function showErrorMessage(message) {
+            $("#error_message").text(message);
+            $("#model_error").modal("show");
+        }
+
+        function showSuccessMessage(response) {
+            // Assuming your response contains a specific success message
+            var successMessage = "Successfully added"; // Modify as needed
+            if (response.indexOf(successMessage) !== -1) {
+                $("#success_message").text(successMessage);
+                $("#model_success").modal("show");
+
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Handle unexpected response here
+                showErrorMessage("Unexpected response: " + response);
+            }
+        }
+    });
+</script>
+
+    <script>
+        function setUpdatestock(uniform_id, grade_level, clothes_type, size) {
+            // Set values for the "ADD" modal
+            document.getElementById('add_uniform_id').value = uniform_id;
+        document.getElementById('add_grade_level').value = grade_level;
+        document.getElementById('add_clothes_type').value = clothes_type;
+        document.getElementById('add_size').value = size;
+    }
+
+    </script>
+<script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("tableSearch");
+            filter = input.value.toUpperCase();
+            table = document.querySelector(".table-striped");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {  // Start loop from index 1 to exclude header
+                td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                txtValue = td[j].innerText || td[j].textContent;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            break;
+                        } else {
+                tr[i].style.display = "none";
+            }
+        }
+}
+}
+}
+
+document.getElementById("tableSearch").addEventListener("keyup", searchTable);
+</script>
+
+
+

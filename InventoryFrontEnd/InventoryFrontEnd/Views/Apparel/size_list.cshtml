@@ -1,0 +1,323 @@
+﻿@using InventoryFrontEnd.Models;
+@model Modelall
+@{
+    ViewBag.Title = "size_list";
+    Layout = "~/Views/Shared/With_Side_bar.cshtml";
+}
+
+<!-- Main Content -->
+<div class="col-md-9 h-100 overflow-auto">
+    <div class="sticky-xl-top">
+        <div class="card">
+            <div class="card-body mt-3">
+                <h2 id="room-label" class="text-center mt-4">@ViewBag.campus_name</h2>
+                <h2 class="text-center mt-4">Size List</h2>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addgradelevelbtn">ADD</button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h3 class="text-center">
+                            @foreach (var item in Model.AllSizecounters)
+                            {
+                                <a class="text-center">@Html.DisplayFor(modelItem => item.Counter)</a>
+                            }
+                        </h3>
+                    </div>
+                    <div class="col-4">
+                        <div class="search-form">
+                            <input type="text" id="tableSearch" class="custom-input" placeholder="Search...">
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Number</th>
+                            <th class="text-center">Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var counter = 1;
+                        }
+                        @foreach (var item in Model.Allsize)
+                        {
+                        <tr>
+                            <td class="text-center">@counter</td>
+                            <td class="text-center">@item.Size</td>
+                            
+                            <td> <button type="button" class="btn btn-sm btn-primary mt-2 custom-button" data-bs-toggle="modal" data-bs-target="#updatesizebtn" onclick="setUpdateFields('@item.Size_ID', '@item.Size', '@item.Campus_name')">Modify</button></td>
+                            
+                        </tr>
+                            {
+                                counter++;
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addgradelevelbtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">ADD Size</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="add_sizes">Size</label>
+                            <input type="text" class="form-control" id="add_sizes" name="add_sizes" autocomplete="off" required />
+
+
+                            <input type="text" class="form-control visually-hidden" id="add_campusname" value="@ViewBag.campus_name" name="add_campusname" autocomplete="off" required />
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" id="addsizebtn">ADD</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*   Modify Size *@
+
+<div class="modal fade" id="updatesizebtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                    <input type="text" class="form-control visually-hidden" name="updateID" id="updateID" placeholder="Size ID">
+
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="updatesize" id="updatesize" placeholder="Size">
+                    <label for="updategrade">Size</label>
+                </div>
+            </div>
+                    <input type="text" class="form-control visually-hidden" name="updatecampus" id="updatecampus" placeholder="campus Name">
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="updatebtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Error Modal Dialog -->
+<div class="modal fade" id="model_error" tabindex="-1" aria-labelledby="model_errorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="model_errorLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="error_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal Dialog -->
+<div class="modal fade" id="model_success" tabindex="-1" aria-labelledby="model_successLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="model_successLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="success_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#updatebtn").click(function () {
+            $("#error_message").text("");
+            var updateID = $("#updateID").val();
+            if (updateID === '') {
+                showErrorMessage("Please supply a ID");
+                return;
+            }
+
+            var updatesize = $("#updatesize").val();
+            if (updatesize === '') {
+                showErrorMessage("Please supply a Grade Level");
+                return;
+            }
+            var updatecampus = $("#updatecampus").val();
+
+            var updatedata = {
+                updateID: updateID,
+                updatesize: updatesize,
+                updatecampus: updatecampus
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Apparel/modifysizes",
+                data: updatedata,
+                success: function (response) {
+                    if (response.indexOf("Successfully updated") !== -1) {
+                        showSuccessMessage(response);
+                    } else {
+                        showErrorMessage(response);
+                    }
+                },
+                error: function () {
+                    showErrorMessage("An error occurred while Updating");
+                },
+            });
+        });
+
+        function showErrorMessage(message) {
+            $("#error_message").text(message);
+            $("#model_error").modal("show");
+        }
+
+        function showSuccessMessage(response) {
+            // Assuming your response contains a specific success message
+            var successMessage = "Successfully updated"; // Modify as needed
+            if (response.indexOf(successMessage) !== -1) {
+                $("#success_message").text(successMessage);
+                $("#model_success").modal("show");
+
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Handle unexpected response here
+                showErrorMessage("Unexpected response: " + response);
+            }
+        }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // ... (your existing script for clickable rows)
+    });
+
+    function setUpdateFields(Size_ID, Size, Campus_name) {
+        document.getElementById('updateID').value = Size_ID;
+        document.getElementById('updatesize').value = Size;
+        document.getElementById('updatecampus').value = Campus_name;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#addsizebtn").click(function () {
+            $("#error_message").text("");
+            var add_sizes = $("#add_sizes").val();
+            if (add_sizes === '') {
+                showErrorMessage("Please supply a SIZE.");
+                return;
+            }
+            var add_campusname = $("#add_campusname").val();
+
+            var addsizedata = {
+                add_sizes: add_sizes,
+                add_campusname: add_campusname
+
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Apparel/addsizefunc",
+                data: addsizedata,
+                success: function (response) {
+                    if (response.indexOf("Added Successfully") !== -1) {
+                        showSuccessMessage(response);
+                    } else {
+                        showErrorMessage(response);
+                    }
+                },
+                error: function () {
+                    showErrorMessage("An error occurred while adding the Room item");
+                },
+            });
+        });
+
+        function showErrorMessage(message) {
+            $("#error_message").text(message);
+            $("#model_error").modal("show");
+        }
+
+        function showSuccessMessage(response) {
+            // Assuming your response contains a specific success message
+            var successMessage = "Added Successfully"; // Modify as needed
+            if (response.indexOf(successMessage) !== -1) {
+                $("#success_message").text(successMessage);
+                $("#model_success").modal("show");
+
+                // Redirect to the "Campus" page after showing the success message
+                setTimeout(function () {
+                    location.reload();
+                }, 1000); // Adjust the delay as needed (in milliseconds)
+            } else {
+                // Handle unexpected response here
+                showErrorMessage("Unexpected response: " + response);
+            }
+        }
+    });
+</script>
+
+
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("tableSearch");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table-striped");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {  // Start loop from index 1 to exclude header
+            td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].innerText || td[j].textContent;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+
+    document.getElementById("tableSearch").addEventListener("keyup", searchTable);
+</script>
+

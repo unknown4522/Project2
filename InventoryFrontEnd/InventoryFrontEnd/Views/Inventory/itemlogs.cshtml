@@ -1,0 +1,221 @@
+﻿@using InventoryFrontEnd.Models;
+@model Modelall
+@{
+    ViewBag.Title = "ITEM LOGS";
+    Layout = "~/Views/Shared/With_Side_Bar.cshtml";
+
+}
+
+<!-- Main Content -->
+<div class="col-md-9 h-100 overflow-auto">
+    <div class="sticky-xl-top">
+        <div class="card">
+            <div class="card-body mt-3">
+                <h2 id="room-label" class="text-center mt-4">@ViewBag.campus_name</h2>
+                <h2 class="text-center mt-4">Asset Reports</h2>
+                <div class="search-form col-md-4 offset-md-9">
+                    <input type="text" id="tableSearch" class="custom-input" placeholder="Search...">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ASSET NAME</th>
+                                <th>SERIAL NUMBER</th>
+                                <th>DATE</th>
+                                <th>PROCESS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Item_logs_data)
+                            {
+                                <tr class="clickable-row hover-scale">
+                                    <td>@Html.DisplayFor(modelItem => item.Item_name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Serial_number)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Date_transfer)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Process)</td>
+                                    <td data-last-location="@item.Last_location" data-current-location="@item.Current_location" data-requested-by="@item.Requested_by" data-transfer-by="@item.Transfer_by" data-process="@item.Process"
+                                        data-itemModel="@item.Model" data-itemBrand="@item.Brand" data-itemtype="@item.Item_type" data-itemstatus="@item.Item_status" data-itemDepartment="@item.Department"></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Modal for Item Details*@
+<div class="modal fade" id="itemDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4"><strong>FROM:</strong></div>
+                    <div class="col-md-8"><span id="modalLastLocation"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>TO:</strong></div>
+                    <div class="col-md-8"><span id="modalCurrentLocation"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>REQUESTED BY:</strong></div>
+                    <div class="col-md-8"><span id="modalRequestedBy"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>TRANSFER BY:</strong></div>
+                    <div class="col-md-8"><span id="modalTransferBy"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>PROCESS:</strong></div>
+                    <div class="col-md-8"><span id="modalProcess"></span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><strong>MODEL:</strong></div>
+                    <div class="col-md-8"><span id="modalitemmodel"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>BRAND:</strong></div>
+                    <div class="col-md-8"><span id="modalitembrand"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>ITEM TYPE:</strong></div>
+                    <div class="col-md-8"><span id="modalitemtype"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>STATUS:</strong></div>
+                    <div class="col-md-8"><span id="modalitemstatus"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>DEPARTMENT:</strong></div>
+                    <div class="col-md-8"><span id="modalitemdepartment"></span></div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".clickable-row");
+
+        rows.forEach(row => {
+            row.addEventListener("click", function () {
+                const lastLocation = this.querySelector("td[data-last-location]").getAttribute("data-last-location");
+                const currentLocation = this.querySelector("td[data-current-location]").getAttribute("data-current-location");
+                const requestedBy = this.querySelector("td[data-requested-by]").getAttribute("data-requested-by");
+                const transferBy = this.querySelector("td[data-transfer-by]").getAttribute("data-transfer-by");
+                const Process = this.querySelector("td[data-process]").getAttribute("data-process");
+                const Model = this.querySelector("td[data-itemModel]").getAttribute("data-itemModel");
+                const Brand = this.querySelector("td[data-itemBrand]").getAttribute("data-itemBrand");
+                const Itemtype = this.querySelector("td[data-itemtype]").getAttribute("data-itemtype");
+                const Itemstatus = this.querySelector("td[data-itemstatus]").getAttribute("data-itemstatus");
+                const Department = this.querySelector("td[data-itemDepartment]").getAttribute("data-itemDepartment");
+
+                document.getElementById("modalLastLocation").textContent = lastLocation;
+                document.getElementById("modalCurrentLocation").textContent = currentLocation;
+                document.getElementById("modalRequestedBy").textContent = requestedBy;
+                document.getElementById("modalTransferBy").textContent = transferBy;
+                document.getElementById("modalProcess").textContent = Process;
+                document.getElementById("modalitemmodel").textContent = Model;
+                document.getElementById("modalitembrand").textContent = Brand;
+                document.getElementById("modalitemtype").textContent = Itemtype;
+                document.getElementById("modalitemstatus").textContent = Itemstatus;
+                document.getElementById("modalitemdepartment").textContent = Department;
+
+                $('#itemDetailsModal').modal('show');
+            });
+        });
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function compareDates(a, b) {
+            return new Date(b) - new Date(a);
+        }
+        var $tbody = $("table tbody");
+        $tbody.find("tr").sort(function (a, b) {
+            var dateA = $(a).find("td:nth-child(3)").text();
+            var dateB = $(b).find("td:nth-child(3)").text();
+            return compareDates(dateA, dateB);
+        }).appendTo($tbody);
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".clickable-row");
+
+        rows.forEach(row => {
+            row.addEventListener("click", function () {
+                const lastLocation = this.querySelector("td[data-last-location]").getAttribute("data-last-location");
+                const currentLocation = this.querySelector("td[data-current-location]").getAttribute("data-current-location");
+                const requestedBy = this.querySelector("td[data-requested-by]").getAttribute("data-requested-by");
+                const transferBy = this.querySelector("td[data-transfer-by]").getAttribute("data-transfer-by");
+                const Process = this.querySelector("td[data-process]").getAttribute("data-process");
+                const Model = this.querySelector("td[data-itemModel]").getAttribute("data-itemModel");
+                const Brand = this.querySelector("td[data-itemBrand]").getAttribute("data-itemBrand");
+                const Itemtype = this.querySelector("td[data-itemtype]").getAttribute("data-itemtype");
+                const Itemstatus = this.querySelector("td[data-itemstatus]").getAttribute("data-itemstatus");
+                const Department = this.querySelector("td[data-itemDepartment]").getAttribute("data-itemDepartment");
+
+                document.getElementById("modalLastLocation").textContent = lastLocation;
+                document.getElementById("modalCurrentLocation").textContent = currentLocation;
+                document.getElementById("modalRequestedBy").textContent = requestedBy;
+                document.getElementById("modalTransferBy").textContent = transferBy;
+                document.getElementById("modalProcess").textContent = Process;
+                document.getElementById("modalitemmodel").textContent = Model;
+                document.getElementById("modalitembrand").textContent = Brand;
+                document.getElementById("modalitemtype").textContent = Itemtype;
+                document.getElementById("modalitemstatus").textContent = Itemstatus;
+                document.getElementById("modalitemdepartment").textContent = Department;
+
+                $('#itemDetailsModal').modal('show');
+            });
+        });
+    });
+</script>
+
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("tableSearch");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table-striped");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {  // Start loop from index 1 to exclude header
+            td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].innerText || td[j].textContent;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+
+    document.getElementById("tableSearch").addEventListener("keyup", searchTable);
+</script>

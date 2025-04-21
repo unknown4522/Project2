@@ -1,0 +1,419 @@
+﻿@using InventoryFrontEnd.Models;
+@model Modelall
+@{
+    ViewBag.Title = "ALL ROOMS";
+    Layout = "~/Views/Shared/With_Side_Bar.cshtml";
+
+}
+
+
+<div class="col-md-9 h-100">
+    <div class="sticky-xl-top">
+        <div class="card overflow-y-auto">
+            <div class="card-body mt-3">
+                <h2 id="room-label" class="text-center">@ViewBag.campus_name </h2>
+                <h2 class="text-center mt-4">Room List</h2>
+                <div class="search-form col-md-4 offset-md-9">
+                    <input type="text" id="tableSearch" class="custom-input" placeholder="Search...">
+                </div>
+              
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createroombtn">
+                                ADD ROOM
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <h3 class="text-center">
+                            @foreach (var item in Model.AllGradecounters)
+                            {
+                                <a class="text-center">@Html.DisplayFor(modelItem => item.Counter)</a>
+                            }
+                        </h3>
+                    </div>
+                    <div class="col-4">
+                        <div class="search-form">
+                            <input type="text" id="tableSearch" class="custom-input" placeholder="Search..."><br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ROOM NAME</th>
+                                <th>FLOOR LEVEL</th>
+                                <th>ROOM DESCRIPTION</th>
+                                @if (Session["UserRole"] != null && Session["UserRole"].ToString() != "IT Asset Incharge" && Session["UserRole"].ToString() != "Apparel Incharge")
+                                {
+                                    <th>ACTION</th>
+                                }
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Room_list)
+                            {
+                                <tr class="clickable-row hover-scale" data-href="@Url.Action("Insideroom", "Inventory", new { room_name = item.Room_name, campus_name = ViewBag.campus_name })">
+                                    <td>@Html.DisplayFor(modelItem => item.Room_name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Floor_level)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Room_description)</td>
+                                    <td>
+                                        @if (Session["UserRole"] != null && Session["UserRole"].ToString() != "IT Asset Incharge" && Session["UserRole"].ToString() != "Apparel Incharge")
+                                        {
+                                            <button class="btn btn-secondary edit-button hover-scale"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#updateroom"
+                                                    onclick="setoUPDATErooms('@item.Room_name', '@item.Room_description', '@item.Floor_level', '@item.ID'); event.stopPropagation();"
+                                                    data-room-id="@item.ID">
+                                                Modify
+                                            </button>
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ADD ROOMS Modal -->
+<div class="modal fade add-item-modal" id="createroombtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-static">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h2 class="modal-title" id="exampleModalLabel">ADD NEW ROOM</h2>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="add_room_name" name="add_room_name" placeholder=" " autocomplete="off" required />
+                                <label for="add_room_name" class="form-label">Room Name</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="add_floor_level" name="add_floor_level" required>
+                                    <option value="" disabled selected hidden>Choose FLOOR LEVEL</option>
+                                    <option value="1ST FLOOR">1ST FLOOR</option>
+                                    <option value="2ND FLOOR">2ND FLOOR</option>
+                                    <option value="3RD FLOOR">3RD FLOOR</option>
+                                    <option value="4TH FLOOR">4TH FLOOR</option>
+                                    <option value="5TH FLOOR">5TH FLOOR</option>
+                                    <option value="ROOFTOP">ROOFTOP</option>
+                                </select>
+                                <label for="add_floor_level" class="form-label">Floor Level</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="add_room_description" name="add_room_description" placeholder=" " autocomplete="off" required />
+                                <label for="add_room_description" class="form-label">Room Description</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visually-hidden">
+                        <input type="text" class="form-control" id="add_campus_name" value="@ViewBag.campus_name" name="add_campus_name" autocomplete="off" readonly />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer fixed-bottom text-center">
+                <button class="btn btn-success" id="addroombtn">ADD</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- UPDATE ROOMS Modal -->
+<div class="modal fade" id="updateroom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">UPDATE</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="update_room_name">ROOM NAME:</label>
+                            <input type="text" class="form-control" id="update_room_name" name="update_room_name" autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="update_floorlevel">FLOOR LEVEL:</label>
+                            <select class="form-select" id="update_floorlevel" name="update_floorlevel" required>
+                                <option value="" disabled selected hidden>Choose FLOOR LEVEL</option>
+                                <option value="1ST FLOOR">1ST FLOOR</option>
+                                <option value="2ND FLOOR">2ND FLOOR</option>
+                                <option value="3RD FLOOR">3RD FLOOR</option>
+                                <option value="4TH FLOOR">4TH FLOOR</option>
+                                <option value="5TH FLOOR">5TH FLOOR</option>
+                                <option value="ROOFTOP">ROOFTOP</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="update_room_description">ROOM DESCRIPTION:</label>
+                            <input type="text" class="form-control" id="update_room_description" name="update_room_description" autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="update_room_id" name="update_room_id" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="updateroombtn">Update </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal Dialog -->
+<div class="modal fade" id="model_error" tabindex="-1" aria-labelledby="model_errorLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="model_errorLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="error_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal Dialog -->
+<div class="modal fade" id="model_success" tabindex="-1" aria-labelledby="model_successLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="model_successLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="success_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#addroombtn").click(function () {
+            $("#error_message").text("");
+            var add_room_name = $("#add_room_name").val();
+            if (add_room_name === '') {
+                showErrorMessage("Please supply a Room Name.");
+                return;
+            }
+            var add_floor_level = $("#add_floor_level").val();
+            if (add_floor_level === null || add_floor_level === '') {
+                showErrorMessage("Please choose a valid Floor Level.");
+                return;
+            }
+            var add_room_description = $("#add_room_description").val();
+            var add_campus_name = $("#add_campus_name").val();
+
+            var addroomdata = {
+                add_room_name: add_room_name,
+                add_floor_level: add_floor_level,
+                add_room_description: add_room_description,
+                add_campus_name: add_campus_name
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Inventory/createrooms",
+                data: addroomdata,
+                success: function (response) {
+                    if (response.indexOf("Successfully added") !== -1) {
+                        showSuccessMessage(response);
+                    } else {
+                        showErrorMessage(response);
+                    }
+                },
+                error: function () {
+                    showErrorMessage("An error occurred while adding the Room item");
+                },
+            });
+        });
+
+        function showErrorMessage(message) {
+            $("#error_message").text(message);
+            $("#model_error").modal("show");
+        }
+
+        function showSuccessMessage(response) {
+            // Assuming your response contains a specific success message
+            var successMessage = "Successfully added"; // Modify as needed
+            if (response.indexOf(successMessage) !== -1) {
+                $("#success_message").text(successMessage);
+                $("#model_success").modal("show");
+
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Handle unexpected response here
+                showErrorMessage("Unexpected response: " + response);
+            }
+        }
+    });
+</script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#updateroombtn").click(function () {
+            $("#error_message").text("");
+            var update_room_name = $("#update_room_name").val();
+            if (update_room_name === '') {
+                showErrorMessage("Please supply a Room Name.");
+                return;
+            }
+            var update_floorlevel = $("#update_floorlevel").val();
+            if (update_floorlevel === null || update_floorlevel === '') {
+                showErrorMessage("Please choose a valid Floor Level.");
+                return;
+            }
+            var update_room_description = $("#update_room_description").val();
+            var update_room_id = $("#update_room_id").val();
+            var add_campus_name = $("#add_campus_name").val();
+
+            var addroomdata = {
+                update_room_name: update_room_name,
+                update_floorlevel: update_floorlevel,
+                update_room_description: update_room_description,
+                update_room_id: update_room_id,
+                add_campus_name: add_campus_name
+                
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Inventory/updaterooms",
+                data: addroomdata,
+                success: function (response) {
+                    if (response.indexOf("Successfully updated item") !== -1) {
+                        showSuccessMessage(response);
+                    } else {
+                        showErrorMessage(response);
+                    }
+                },
+                error: function () {
+                    showErrorMessage("An error occurred while adding the Room item");
+                },
+            });
+        });
+
+        function showErrorMessage(message) {
+            $("#error_message").text(message);
+            $("#model_error").modal("show");
+        }
+
+        function showSuccessMessage(response) {
+            // Assuming your response contains a specific success message
+            var successMessage = "Successfully updated item"; // Modify as needed
+            if (response.indexOf(successMessage) !== -1) {
+                $("#success_message").text(successMessage);
+                $("#model_success").modal("show");
+
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Handle unexpected response here
+                showErrorMessage("Unexpected response: " + response);
+            }
+        }
+    });
+</script>
+
+
+<script>
+    // JavaScript function to handle row click event and navigate to the specified URL
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".clickable-row");
+
+        rows.forEach(function (row) {
+            row.addEventListener("click", function () {
+                const href = this.getAttribute("data-href");
+                if (href) {
+                    window.location.href = href;
+                }
+            });
+        });
+    });
+
+    // JavaScript function to set values in the update room modal
+    function setoUPDATErooms(Room_name, Room_description, Floor_level, ID) {
+        document.getElementById('update_room_name').value = Room_name;
+        document.getElementById('update_floorlevel').value = Floor_level;
+        document.getElementById('update_room_description').value = Room_description;
+
+        // Get the room_id from the data-room-id attribute
+        var roomIdInput = document.getElementById('update_room_id');
+        roomIdInput.value = ID;
+    }
+</script>
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("tableSearch");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table-striped");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {  // Start loop from index 1 to exclude header
+            td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    txtValue = td[j].innerText || td[j].textContent;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+
+    document.getElementById("tableSearch").addEventListener("keyup", searchTable);
+</script>
+
+
+
+
+
+
+
+
+

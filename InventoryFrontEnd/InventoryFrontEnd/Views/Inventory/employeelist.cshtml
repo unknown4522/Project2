@@ -1,0 +1,569 @@
+﻿@using InventoryFrontEnd.Models;
+@model Modelall
+@{
+    ViewBag.Title = "EMPLOYEE LIST";
+    Layout = "~/Views/Shared/With_Side_Bar.cshtml";
+
+}
+
+    <!-- Main Content -->
+    <div class="col-md-9 h-100 overflow-auto">
+        <div class="sticky-xl-top">
+            <div class="card">
+                <div class="card-body mt-3">
+                    <h2 id="room-label" class="text-center mt-4">@ViewBag.campus_name</h2>
+                    <h2 class="text-center mt-4">Employee List</h2>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addemployeebtn">ADD</button>
+                                </div>
+                                <div class="col-6">
+                                    @if (Session["UserRole"] != null && Session["UserRole"].ToString() != "IT Asset Incharge" && Session["UserRole"].ToString() != "Apparel Incharge")
+                                    {
+                                        <button type="button" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#createbtn">Create Account</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h3 class="text-center">
+                                @foreach (var item in Model.Allemployeecounters)
+                                {
+                                    <a class="text-center">@Html.DisplayFor(modelItem => item.Counter)</a>
+                                }
+                            </h3>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="search-form col-12">
+                                    <input type="text" id="tableSearch" class="custom-input" placeholder="Search...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center">Number</th>
+                                <th class="text-center">First Name</th>
+                                <th class="text-center">Last Name</th>
+                                @if (Session["UserRole"] != null && Session["UserRole"].ToString() != "IT Asset Incharge" && Session["UserRole"].ToString() != "Apparel Incharge")
+                                {
+                                    <th class="text-center">Action</th>
+                                }
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var counter = 1;
+                            }
+                            @foreach (var item in Model.Employees)
+                            {
+                                <tr>
+                                    <td class="text-center">@counter</td>
+                                    <td class="text-center">@item.Firstname</td>
+                                    <td class="text-center">@item.Lastname</td>
+                                    @if (Session["UserRole"] != null && Session["UserRole"].ToString() != "IT Asset Incharge" && Session["UserRole"].ToString() != "Apparel Incharge")
+                                    {
+                                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatemodal" onclick="setUpdateFields('@item.ID', '@item.Firstname', '@item.Lastname', '@item.Username', '@item.Password', '@item.Role', '@item.Campus_name')"> Modify </button> </td>
+                                    }
+
+                                </tr>
+                                {
+                                    counter++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*   ADD EMPLOYEE NAME THAT NO HAVE ACCOUNT   *@
+    <div class="modal fade" id="addemployeebtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">ADD EMPLOYEE</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="add_employee" id="add_employee" placeholder="Employee First Name">
+                                    <label for="add_employee">Employee First Name</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="add_employee_last_name" id="add_employee_last_name" placeholder="Employee Last Name">
+                                    <label for="add_employee_last_name">Employee Last Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <input class="visually-hidden" type="text" id="add_campus_name" name="add_campus_name" value="@ViewBag.campus_name" required />
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="addEmployeebutton">ADD EMPLOYEE</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*   UPDATE EMPLOYEE NAME THAT NO HAVE ACCOUNT   *@
+    <<div class="modal fade" id="updatemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">UPDATE EMPLOYEE</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control visually-hidden" name="id_employee" id="id_employee" placeholder="Employee First Name">
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="update_employee" id="update_employee" placeholder="Employee First Name">
+                                    <label for="update_employee">First Name</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="update_employee_last_name" id="update_employee_last_name" placeholder="Employee Last Name">
+                                    <label for="update_employee_last_name">Last Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="update_username" id="update_username" placeholder="Username">
+                                    <label for="update_username">Username</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" name="update_password" id="update_password" placeholder="Password">
+                                    <label for="update_password">Password</label>
+                                </div>
+                                <div class="form-floating">
+                                    <select class="form-select" id="update_role" name="update_role" required>
+                                        <option value="" disabled selected hidden>Choose Role of Employee</option>
+                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="IT Asset Incharge">IT Asset Incharge</option>
+                                        <option value="Apparel Incharge">Apparel Incharge</option>
+                                    </select>
+                                    <label for="update_role">Role</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="add_campus_name">Campus Name:</label>
+                                    <select class="form-select" id="update_campus_name" name="update_campus_name" required>
+                                        <option value="" disabled selected hidden>Choose Assign Campus</option>
+                                        @foreach (var Item in Model.Allcampus)
+                                        {
+                                            <option value="@Item.Campus_name">@Item.Campus_name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateEmployeebutton">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ADD Employee Account -->
+
+    <div class="modal fade" id="createbtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="exampleModalLabel">ADD Campus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="add_employee_name">First Name:</label>
+                                <input type="text" class="form-control" id="add_employee_name" name="add_employee_name" autocomplete="off" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="add_employee_lastname">Last Name:</label>
+                                <input type="text" class="form-control" id="add_employee_lastname" name="add_employee_lastname" autocomplete="off" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="add_campus_name">Campus Name:</label>
+                                <select class="form-select" id="add_campus_name" name="add_campus_name" required>
+                                    <option value="" disabled selected hidden>Choose Assign Campus</option>
+                                    @foreach (var Item in Model.Allcampus)
+                                    {
+                                        <option value="@Item.Campus_name">@Item.Campus_name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Add_Username">User Name:</label>
+                                <input type="text" class="form-control" id="Add_Username" name="Add_Username" autocomplete="off" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="add_Password">Password:</label>
+                                <input type="text" class="form-control" id="add_Password" name="add_Password" autocomplete="off" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="add_Role">Role:</label>
+                                <select class="form-select" id="add_Role" name="add_Role" required>
+                                    <option value="" disabled selected hidden>Choose Role of Employee</option>
+                                    <option value="ADMIN">ADMIN</option>
+                                    <option value="IT Asset Incharge">IT Asset Incharge</option>
+                                    <option value="Apparel Incharge">Apparel Incharge</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer fixed-bottom text-center">
+                    <button class="btn btn-success" id="Createaccountbtn">ADD</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="successModalLabel">Success</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Employee successfully added!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal Dialog -->
+    <div class="modal fade" id="model_error" tabindex="-1" aria-labelledby="model_errorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="model_errorLabel">Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="error_message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal Dialog -->
+    <div class="modal fade" id="model_success" tabindex="-1" aria-labelledby="model_successLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="model_successLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="success_message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#Createaccountbtn").click(function () {
+                $("#error_message").text("");
+                var add_employee_name = $("#add_employee_name").val();
+                if (add_employee_name === '') {
+                    showErrorMessage("Please supply a Employee Name");
+                    return;
+                }
+                var add_employee_lastname = $("#add_employee_lastname").val();
+                if (add_employee_lastname === '') {
+                    showErrorMessage("Please supply a Employee Last Name");
+                    return;
+                }
+                var add_campus_name = $("#add_campus_name").val();
+                if (add_campus_name === '') {
+                    showErrorMessage("Please supply a Campus_name.");
+                    return;
+                }
+                var Add_Username = $("#Add_Username").val();
+                if (Add_Username === '') {
+                    showErrorMessage("Please supply a User Name.");
+                    return;
+                }
+                var add_Password = $("#add_Password").val();
+                if (add_Password === '') {
+                    showErrorMessage("Please supply a Password.");
+                    return;
+                }
+                var add_Role = $("#add_Role").val();
+                if (add_Role === '') {
+                    showErrorMessage("Please supply a Role.");
+                    return;
+                }
+
+                var createaccountdata = {
+                    add_employee_name: add_employee_name,
+                    add_employee_lastname: add_employee_lastname,
+                    add_campus_name: add_campus_name,
+                    Add_Username: Add_Username,
+                    add_Password: add_Password,
+                    add_Role: add_Role,
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Inventory/createemplyeeaccount",
+                    data: createaccountdata,
+                    success: function (response) {
+                        if (response.indexOf("Successfully Created") !== -1) {
+                            showSuccessMessage(response);
+                        } else {
+                            showErrorMessage(response);
+                        }
+                    },
+                    error: function () {
+                        showErrorMessage("An error occurred while adding the Room item");
+                    },
+                });
+            });
+
+            function showErrorMessage(message) {
+                $("#error_message").text(message);
+                $("#model_error").modal("show");
+            }
+
+            function showSuccessMessage(response) {
+                // Assuming your response contains a specific success message
+                var successMessage = "Successfully added campus"; // Modify as needed
+                if (response.indexOf(successMessage) !== -1) {
+                    $("#success_message").text(successMessage);
+                    $("#model_success").modal("show");
+
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    // Handle unexpected response here
+                    showErrorMessage("Unexpected response: " + response);
+                }
+            }
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#addEmployeebutton").click(function () {
+
+                var add_employee = $("#add_employee").val();
+                if (add_employee === '') {
+                    showErrorMessage("Please supply a Employee Name.");
+                    return;
+                }
+                var add_employee_last_name = $("#add_employee_last_name").val();
+                if (add_employee_last_name === '') {
+                    showErrorMessage("Please supply a Employee Last Name.");
+                    return;
+                }
+                var add_campus_name = $("#add_campus_name").val();
+
+                var employeedata = {
+                    add_employee: add_employee,
+                    add_employee_last_name: add_employee_last_name,
+                    add_campus_name: add_campus_name
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Inventory/addemployee",
+                    data: employeedata,
+                    success: function (response) {
+                        if (response.indexOf("Successfully added employee") !== -1) {
+                            showSuccessMessage(response);
+                        } else {
+                            showErrorMessage(response);
+                        }
+                    },
+                    error: function () {
+
+                        alert("An error occurred while adding or checking the employee");
+                    }
+                });
+            });
+
+            function showErrorMessage(message) {
+                $("#error_message").text(message);
+                $("#model_error").modal("show");
+            }
+
+
+            function showSuccessMessage(response) {
+
+                var successMessage = "Successfully added employee";
+                if (response.indexOf(successMessage) !== -1) {
+                    $("#success_message").text(successMessage);
+                    $("#model_success").modal("show");
+
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+
+                    showErrorMessage("Unexpected response: " + response);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#updateEmployeebutton").click(function () {
+
+                var id_employee = $("#id_employee").val();
+                if (id_employee === '') {
+                    showErrorMessage("Please supply a Employee Name.");
+                    return;
+                }
+                var update_employee = $("#update_employee").val();
+                if (update_employee === '') {
+                    showErrorMessage("Please supply a Employee Last Name.");
+                    return;
+                }
+                var update_employee_last_name = $("#update_employee_last_name").val();
+                if (update_employee_last_name === '') {
+                    showErrorMessage("Please supply a Employee Last Name.");
+                    return;
+                }
+                var update_username = $("#update_username").val(); // New line
+                var update_password = $("#update_password").val(); // New line
+                var update_role = $("#update_role").val(); // New line
+                var update_campus_name = $("#update_campus_name").val();
+
+                var updateemployeedata = {
+                    id_employee: id_employee,
+                    update_employee: update_employee,
+                    update_employee_last_name: update_employee_last_name,
+                    update_username: update_username, // New line
+                    update_password: update_password, // New line
+                    update_role: update_role, // New line
+                    update_campus_name: update_campus_name
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Inventory/updateemployee",
+                    data: updateemployeedata,
+                    success: function (response) {
+                        if (response.indexOf("Successfully updated employee") !== -1) { // Modified line
+                            showSuccessMessage(response);
+                        } else { // Modified line
+                            showErrorMessage(response);
+                        }
+                    },
+                    error: function () {
+                        alert("An error occurred while updating the employee"); // Modified line
+                    }
+                });
+            });
+
+            function showErrorMessage(message) {
+                $("#error_message").text(message);
+                $("#model_error").modal("show");
+            }
+
+            function showSuccessMessage(response) {
+                var successMessage = "Successfully updated employee"; // Modified line
+                if (response.indexOf(successMessage) !== -1) {
+                    $("#success_message").text(successMessage);
+                    $("#model_success").modal("show");
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    showErrorMessage("Unexpected response: " + response);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        });
+
+        function setUpdateFields(ID, Firstname, Lastname, Username, Password, Role, Campus_name) {
+            document.getElementById('id_employee').value = ID;
+            document.getElementById('update_employee').value = Firstname;
+            document.getElementById('update_employee_last_name').value = Lastname;
+            document.getElementById('update_username').value = Username;
+            document.getElementById('update_password').value = Password;
+            document.getElementById('update_role').value = Role;
+            document.getElementById('update_campus_name').value = Campus_name;
+        }
+    </script>
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("tableSearch");
+            filter = input.value.toUpperCase();
+            table = document.querySelector(".table-striped");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {  // Start loop from index 1 to exclude header
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].innerText || td[j].textContent;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+
+        document.getElementById("tableSearch").addEventListener("keyup", searchTable);
+    </script>
+
+
+
+
+
+
+
+
