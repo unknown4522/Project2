@@ -1,0 +1,182 @@
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.dll.config
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.pdb
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csc.exe
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csc.exe.config
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csc.rsp
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csi.exe
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csi.exe.config
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csi.rsp
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.Managed.Core.targets
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.AppContext.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Collections.Immutable.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Console.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.Compression.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.FileSystem.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.Pipes.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Reflection.Metadata.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.AccessControl.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Claims.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Principal.Windows.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.ValueTuple.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.XmlDocument.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.XPath.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\vbc.exe
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\vbc.exe.config
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\vbc.rsp
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\VBCSCompiler.exe
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\roslyn\VBCSCompiler.exe.config
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\BouncyCastle.Crypto.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Google.Protobuf.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.Streams.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\K4os.Hash.xxHash.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\MySql.Data.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Newtonsoft.Json.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Buffers.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Memory.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Net.Http.Formatting.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Numerics.Vectors.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.WebHost.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Ubiety.Dns.Core.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\ZstdNet.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\BouncyCastle.Crypto.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Google.Protobuf.pdb
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Google.Protobuf.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.Streams.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\K4os.Hash.xxHash.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\MySql.Data.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Buffers.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Memory.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Numerics.Vectors.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Newtonsoft.Json.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Net.Http.Formatting.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.WebHost.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbprojAssemblyReference.cache
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.Resources.resources
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbproj.GenerateResource.cache
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbproj.CoreCompileInputs.cache
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbproj.CopyComplete
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.dll
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.xml
+C:\My Final Project\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.pdb
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.dll.config
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.pdb
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\InventoryBackEnd.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csc.exe
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csc.exe.config
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csc.rsp
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csi.exe
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csi.exe.config
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\csi.rsp
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.Managed.Core.targets
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.AppContext.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Collections.Immutable.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Console.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.Compression.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.FileSystem.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.IO.Pipes.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Reflection.Metadata.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.AccessControl.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Claims.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Security.Principal.Windows.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.ValueTuple.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.XmlDocument.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.XPath.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\vbc.exe
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\vbc.exe.config
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\vbc.rsp
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\VBCSCompiler.exe
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\roslyn\VBCSCompiler.exe.config
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\BouncyCastle.Crypto.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Google.Protobuf.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.Streams.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\K4os.Hash.xxHash.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\MySql.Data.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Newtonsoft.Json.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Buffers.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Memory.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Net.Http.Formatting.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Numerics.Vectors.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.WebHost.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Ubiety.Dns.Core.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\ZstdNet.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\BouncyCastle.Crypto.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Google.Protobuf.pdb
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Google.Protobuf.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\K4os.Compression.LZ4.Streams.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\K4os.Hash.xxHash.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\MySql.Data.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Buffers.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Memory.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Numerics.Vectors.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Newtonsoft.Json.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Net.Http.Formatting.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\System.Web.Http.WebHost.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbprojAssemblyReference.cache
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.Resources.resources
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbproj.GenerateResource.cache
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbproj.CoreCompileInputs.cache
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.vbproj.CopyComplete
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.dll
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.xml
+C:\GSC Inventory\GSC-inventory\InventoryBackEnd\InventoryBackEnd\obj\Debug\InventoryBackEnd.pdb
