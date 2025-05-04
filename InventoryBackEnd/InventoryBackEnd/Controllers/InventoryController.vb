@@ -185,7 +185,7 @@ Namespace Controllers
                 If sqlConn.State = ConnectionState.Closed Then
                     Try
                         sqlConn.Open()
-                        Using msqlcom As New MySqlCommand("SELECT * FROM brand
+                        Using msqlcom As New MySqlCommand("SELECT * FROM brand_list
                                                             WHERE Campus_name = '" & campus_name & "'", sqlConn)
                             Using dtReader As MySqlDataReader = msqlcom.ExecuteReader()
                                 If dtReader.HasRows = True Then
@@ -235,7 +235,7 @@ Namespace Controllers
                     sqlConn.Open()
 
 
-                    Dim checkBrandQuery As String = "SELECT COUNT(*) FROM brand WHERE Brand_name = @Brand_name AND Campus_name = @Campus_name;"
+                    Dim checkBrandQuery As String = "SELECT COUNT(*) FROM brand_list WHERE Brand_name = @Brand_name AND Campus_name = @Campus_name;"
                     Using cmdCheckBrand As New MySqlCommand(checkBrandQuery, sqlConn)
                         cmdCheckBrand.Parameters.AddWithValue("@Brand_name", Brand_name)
                         cmdCheckBrand.Parameters.AddWithValue("@Campus_name", Campus_name)
@@ -251,7 +251,7 @@ Namespace Controllers
                     End Using
 
                     ' If brand does not exist, proceed with the insertion
-                    Dim insertQuery As String = "INSERT INTO brand (Brand_name, Campus_name) VALUES (@Brand_name, @Campus_name);"
+                    Dim insertQuery As String = "INSERT INTO brand_list (Brand_name, Campus_name) VALUES (@Brand_name, @Campus_name);"
                     Using cmdInsert As New MySqlCommand(insertQuery, sqlConn)
                         cmdInsert.Parameters.AddWithValue("@Brand_name", Brand_name)
                         cmdInsert.Parameters.AddWithValue("@Campus_name", Campus_name)
@@ -289,7 +289,7 @@ Namespace Controllers
                     sqlConn.Open()
 
                     ' Check if the Brand_name already exists
-                    Dim checkQuery As String = "SELECT COUNT(*) FROM brand WHERE Brand_name = @Brand_name AND Brand_ID <> @Brand_ID"
+                    Dim checkQuery As String = "SELECT COUNT(*) FROM brand_list WHERE Brand_name = @Brand_name AND Brand_ID <> @Brand_ID"
                     Using cmdCheck As New MySqlCommand(checkQuery, sqlConn)
                         cmdCheck.Parameters.AddWithValue("@Brand_name", Brand_name)
                         cmdCheck.Parameters.AddWithValue("@Brand_ID", Brand_ID)
@@ -304,7 +304,7 @@ Namespace Controllers
                     End Using
 
                     ' Proceed with the update if Brand_name is unique
-                    Dim sqlQuery As String = "UPDATE brand SET Brand_name = @Brand_name, Campus_name = @Campus_name WHERE Brand_ID = @Brand_ID"
+                    Dim sqlQuery As String = "UPDATE brand_list SET Brand_name = @Brand_name, Campus_name = @Campus_name WHERE Brand_ID = @Brand_ID"
                     Using cmdUpdate As New MySqlCommand(sqlQuery, sqlConn)
                         cmdUpdate.Parameters.AddWithValue("@Brand_ID", Brand_ID)
                         cmdUpdate.Parameters.AddWithValue("@Brand_name", Brand_name)
@@ -865,7 +865,7 @@ Namespace Controllers
                         ' Check if insertion was successful
                         If rowsAffected > 0 Then
                             ' Insert into item_logs table
-                            Dim insertLogQuery As String = "INSERT INTO item_logs (item_name, Serial_number, Date_transfer, Process, Campus_name) VALUES (@Item_name, @Serial_number, @Date_transfer, @Process, @Campus_name);"
+                            Dim insertLogQuery As String = "INSERT INTO item_logs (item_name, Serial_number, Date_transfer, Process, Campus_name, Model, Brand) VALUES (@Item_name, @Serial_number, @Date_transfer, @Process, @Campus_name, @Model, @Brand);"
                             Using cmdInsertLog As New MySqlCommand(insertLogQuery, sqlConn)
                                 ' Parameters for log insertion
                                 cmdInsertLog.Parameters.AddWithValue("@Item_name", Item_name)
@@ -873,6 +873,8 @@ Namespace Controllers
                                 cmdInsertLog.Parameters.AddWithValue("@Date_transfer", Date_now) ' Assuming Date_now is already formatted properly
                                 cmdInsertLog.Parameters.AddWithValue("@Process", "ADD IT ASSET")
                                 cmdInsertLog.Parameters.AddWithValue("@Campus_name", Campus_name)
+                                cmdInsertLog.Parameters.AddWithValue("@Model", Model)
+                                cmdInsertLog.Parameters.AddWithValue("@Brand", Brand)
 
                                 ' Execute log insertion
                                 cmdInsertLog.ExecuteNonQuery()

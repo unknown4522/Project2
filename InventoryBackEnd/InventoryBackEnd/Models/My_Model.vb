@@ -113,12 +113,15 @@ Public Class Materials_list
     Public Property Material_ID As String
     Public Property Material_name As String
     Public Property Quantity As String
-    Public Property Order_date As String
+    Public Property Date_Purchased As String
     Public Property Received_date As String
     Public Property Request_by As String
     Public Property Approve_by As String
     Public Property Status As String
     Public Property Campus_name As String
+    Public Property Supplier As String
+    Public Property Unit As String
+    Public Property Received_By As String
 End Class
 
 Public Class Fieldcounter

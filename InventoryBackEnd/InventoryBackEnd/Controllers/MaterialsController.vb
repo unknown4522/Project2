@@ -32,12 +32,15 @@ Namespace Controllers
                                             .Material_ID = dtReader("Material_ID").ToString()
                                             .Material_name = dtReader("Material_name").ToString()
                                             .Quantity = dtReader("Quantity").ToString()
-                                            .Order_date = dtReader("Order_date").ToString()
+                                            .Date_Purchased = dtReader("Date_Purchased").ToString()
                                             .Received_date = dtReader("Received_date").ToString()
                                             .Request_by = dtReader("Request_by").ToString()
                                             .Approve_by = dtReader("Approve_by").ToString()
                                             .Status = dtReader("Status").ToString()
                                             .Campus_name = dtReader("Campus_name").ToString()
+                                            .Supplier = dtReader("Supplier").ToString()
+                                            .Unit = dtReader("Unit").ToString()
+                                            .Received_By = dtReader("Received_By").ToString()
                                         End With
                                         stats.Add(dataObj)
                                     End While
